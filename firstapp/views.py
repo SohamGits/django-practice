@@ -1,8 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .forms import StudentForm
 
-def trial(request):
-    info = {'name':'Soham', 'class':'TYBSc', 'college':'MIT'},
-    return render(request, 'about.html', info)
+def register(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
 
+        if(form.is_valid()):
+            data = form.cleaned_data
+            return render(request, 'firstapp/success.html', {'data':data})
 
+        return render(request, 'firstapp/register.html', {'form':form})
+
+    form = StudentForm()
+    return render(request, 'firstapp/register.html', {'form':form})
