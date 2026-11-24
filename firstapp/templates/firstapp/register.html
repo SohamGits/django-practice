@@ -1,9 +1,12 @@
-<h2>Student Registration Form</h2>
+<h1>Registration Page</h1>
+
+{% if error %}
+    <h4>{{ error }}</h4>
+{% endif %}
 
 <form method="POST">
     {% csrf_token %}
 
     {{ form.as_p }}
-
     <button type="submit">Submit</button>
 </form>
